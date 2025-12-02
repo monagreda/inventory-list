@@ -60,7 +60,7 @@ export const useInventoryData = () => {
         }
 
         try {
-            await axios.delete(`${API_URL}/products/${idToDelete}`);
+            await axios.delete(`${API_URL}/api/products/${idToDelete}`);
             // Actualiza el estado filtrando la lista
             setProducts(products.filter(p => p._id !== idToDelete));
             showNotification("✅ Producto eliminado correctamente.");
