@@ -10,7 +10,23 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // --- Middlewares ---
-app.use(cors()); // Permite peticiones del frontend de React
+const allowedOrigins = [
+    'https://inventory-list-tau.vercel.app', // Tu dominio Vercel
+    'http://localhost:3000' // Para pruebas locales
+];
+
+const corsOptions = {
+    origin: (origin, callback) => {
+        // Permitir peticiones sin origen (como Postman o CURL) o de los orígenes permitidos
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('No permitido por CORS'));
+        }
+    }
+};
+
+app.use(cors(corsOptions)); // Permite peticiones del frontend de React
 app.use(express.json()); // Parsea las peticiones con cuerpo JSON
 
 // --- Conexión a MongoDB y Arranque del Servidor ---
