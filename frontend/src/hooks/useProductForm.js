@@ -6,7 +6,7 @@ import { useNotification } from '../context/NotificationContext'; // Importar el
 import { productSchema } from "../utils/productSchema";
 
 // URL BASE
-const API_URL = "http://localhost:3001/api/products"; // Asegúrate que el puerto y /api/ sean correctos
+const API_URL = import.meta.env.VITE_API_URL; // Asegúrate que el puerto y /api/ sean correctos
 
 const initialProductState = {
     name: '',
@@ -34,7 +34,7 @@ export const useProductForm = (productId, navigateCallback) => {
                 setLoading(true);
                 setError(null);
                 try {
-                    const response = await axios.get(`${API_URL}/${productId}`);
+                    const response = await axios.get(`${API_URL}/api/products/${productId}`);
                     setFormData(response.data);
                 } catch (err) {
                     console.error("Error al cargar producto para edición:", err);
@@ -93,11 +93,11 @@ export const useProductForm = (productId, navigateCallback) => {
         try {
             if (isEditing) {
                 // EDITAR: PUT
-                await axios.put(`${API_URL}/${productId}`, formData);
+                await axios.put(`${API_URL}/api/products/${productId}`, formData);
                 showNotification("Producto actualizado con éxito!", 'success');
             } else {
                 // CREAR: POST
-                await axios.post(API_URL, formData);
+                await axios.post(`${API_URL}/api/products`, formData);
                 showNotification("Producto creado con éxito!", 'success');
             }
             navigateCallback('/'); // Navegar solo si es exitoso
