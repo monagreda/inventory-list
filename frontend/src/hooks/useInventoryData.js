@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNotification } from "../context/NotificationContext";
 
 //URL base para la API de inventario
-const API_URL = "http://localhost:3001/api";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export const useInventoryData = () => {
 
@@ -21,7 +21,7 @@ export const useInventoryData = () => {
     const fetchProducts = useCallback(async () => {
         setLoading(true);
         try {
-            const response = await axios.get(`${API_URL}/products`);
+            const response = await axios.get(`${API_URL}/api/products`);
             setProducts(response.data);
         } catch (error) {
             console.error("Error al cargar el inventario", error);
