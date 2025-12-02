@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import EditButton from "../reusables/EditButton";
+import DeleteButton from "../reusables/DeleteButton";
 
 
 const ProductRow = React.memo(({ product, handleDelete }) => {
@@ -21,19 +23,9 @@ const ProductRow = React.memo(({ product, handleDelete }) => {
             <td className="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
 
                 {/* Botón EDITAR */}
-                <Link to={`/edit/${product._id}`} className="text-indigo-600 hover:text-indigo-900 mr-4">
-                    <button className="bg-yellow-500 hover:bg-yellow-600 text-white py-1 px-3 rounded-md transition duration-150 text-sm shadow-sm">
-                        ✏️ Editar
-                    </button>
-                </Link>
-
+                <EditButton product={product} />
                 {/* Botón ELIMINAR */}
-                <button
-                    onClick={() => handleDelete(product._id)}
-                    className="bg-red-600 hover:bg-red-700 text-white py-1 px-3 rounded-md transition duration-150 text-sm shadow-sm"
-                >
-                    🗑️ Eliminar
-                </button>
+                <DeleteButton product={product} handleDelete={handleDelete} />
             </td>
         </tr>
     );

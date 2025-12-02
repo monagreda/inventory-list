@@ -1,7 +1,7 @@
 import React from "react";
 
 
-const ModalConfirm = ({ isModalOpen, setIsModalOpen, confirmDelete }) => {
+const ModalConfirm = ({ isModalOpen, setIsModalOpen, ConfirmDelete }) => {
     if (!isModalOpen) return null;
 
     return (
@@ -19,7 +19,7 @@ const ModalConfirm = ({ isModalOpen, setIsModalOpen, confirmDelete }) => {
                         Cancelar
                     </button>
                     <button
-                        onClick={confirmDelete}
+                        onClick={ConfirmDelete}
                         className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition"
                     >
                         Sí, Eliminar
